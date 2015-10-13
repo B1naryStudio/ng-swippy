@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<title>Test Chips</title>
+		<link rel="stylesheet" type="text/css" href="ngswippy.css">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	</head>
+	<style type="text/css">
+	.demo-wrap {
+		height: 65%;
+	}
+
+	body {
+		overflow: hidden;
+		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	}
+	</style>
+	<body ng-app='ngSwippyDemo' ng-controller="MainController" class='ngSwippyDemo'>
+		<p><h1 class="headerText">Demo for ng-swippy Directive</h1></p>
+		<div class='demo-wrap'>
+			<ng-swippy collection='itemsCollection' width='' height='300px'></ng-swippy>
+		<div>
+	</body>
+	<script src="angular.js"></script>
+	<script src='angular-touch.js'></script>
+	<script src='swipeDirective.js'></script>
+	<script src='swipeFactory.js'></script>
+	<script src="ng-swippy.js"></script>
+	<script src="app.js"></script>
+</html>

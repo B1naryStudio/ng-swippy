@@ -1,0 +1,130 @@
+.photo-item {
+	height: 100%;
+	width: 100%;
+	background-size: cover !important;
+}
+
+.swipable-card {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 96%;
+  margin: 2% 2% 0 2%;
+  background: #fff;
+  float: left;
+  padding: 0;
+  z-index: 10000;
+  border: 1px solid #ddd;
+}
+
+.swipable-card:nth-last-of-type(1),
+.swipable-card:nth-last-of-type(2) {
+  -webkit-transition: transform 0.2s, width 0.2s, height 0.2s, margin 0.2s;
+  -moz-transition: transform 0.2s, width 0.2s, height 0.2s, margin 0.2s;
+  -ms-transition: transform 0.2s, width 0.2s, height 0.2s, margin 0.2s;
+  transition: transform 0.2s, width 0.2s, height 0.2s, margin 0.2s;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  -webkit-perspective: 1000;
+  will-change: transform;
+}
+.swipable-card:nth-last-of-type(2) {
+  width: 94%;
+  margin: 3% 3% 0 3%;
+}
+.swipable-card:nth-last-of-type(3) {
+  width: 92%;
+  margin: 4% 4% 0 4%;
+}
+.swipable-card:nth-last-of-type(4) {
+  width: 92%;
+  margin: 4% 4% 0 4%;
+}
+.swipable-card:nth-last-of-type(5) {
+  width: 92%;
+  margin: 4% 4% 0 4%;
+}
+.swipable-card:nth-last-of-type(6) {
+  width: 92%;
+  margin: 4% 4% 0 4%;
+}
+
+
+.ng-swippy {
+	width: 100%;
+	height: 200px;
+	position: relative;
+}
+
+.progress-stats {
+  height: 55px;
+  color: #777;
+  padding: 10px 0;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.progress-stats .card-shown {
+	width: 66.6666666667%;
+	display: inline-block;
+	padding-right: 15px;
+    padding-left: 15px;
+    box-sizing: border-box;
+    float: left;
+}
+.progress-stats .card-shown-number {
+  font-size: 16px;
+  height: 20px;
+  text-transform: uppercase;
+}
+.progress-stats .card-shown-text {
+  font-size: 12px;
+  height: 16px;
+}
+
+.progress-stats .card-number {
+  line-height: 35px;
+  text-align: right;
+  display: inline-block;
+  width: 33.33333333%;
+  padding-right: 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+.progress-stats .card-number img {
+  height: 25px;
+  width: 25px;
+  vertical-align: middle;
+}
+
+.know-label {
+  position: absolute;
+  top: 20%;
+  left: 15%;
+  color: #5bd25b;
+  font-size: 100%;
+  border: 3px solid #5bd25b;
+  opacity: 0;
+  border-radius: 1%;
+  padding: 0 3%;
+  font-family: Open Sans, Sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.dontknow-label {
+  position: absolute;
+  top: 20%;
+  left: 15%;
+  color: #fe3939;
+  font-size: 100%;
+  border: 3px solid #fe3939;
+  opacity: 0;
+  border-radius: 1%;
+  padding: 0 3%;
+  font-family: Open Sans, Sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+}
