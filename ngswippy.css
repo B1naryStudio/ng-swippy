@@ -17,8 +17,8 @@
   border: 1px solid #ddd;
 }
 
-.swipable-card:nth-last-of-type(1),
-.swipable-card:nth-last-of-type(2) {
+.ng-swippy .swipable-card:nth-last-of-type(1),
+.ng-swippy .swipable-card:nth-last-of-type(2) {
   -webkit-transition: transform 0.2s, width 0.2s, height 0.2s, margin 0.2s;
   -moz-transition: transform 0.2s, width 0.2s, height 0.2s, margin 0.2s;
   -ms-transition: transform 0.2s, width 0.2s, height 0.2s, margin 0.2s;
@@ -27,26 +27,6 @@
   -webkit-transform-style: preserve-3d;
   -webkit-perspective: 1000;
   will-change: transform;
-}
-.swipable-card:nth-last-of-type(2) {
-  width: 94%;
-  margin: 3% 3% 0 3%;
-}
-.swipable-card:nth-last-of-type(3) {
-  width: 92%;
-  margin: 4% 4% 0 4%;
-}
-.swipable-card:nth-last-of-type(4) {
-  width: 92%;
-  margin: 4% 4% 0 4%;
-}
-.swipable-card:nth-last-of-type(5) {
-  width: 92%;
-  margin: 4% 4% 0 4%;
-}
-.swipable-card:nth-last-of-type(6) {
-  width: 92%;
-  margin: 4% 4% 0 4%;
 }
 
 
