@@ -3,12 +3,12 @@ angular.module('ngSwippy', ['ngTouch']).
 		return {
 			restrict: 'E',
 			replace: true,
-			template: 	'<div class="ng-swippy">'+
-							'<div person="person" style="width: {{width}}; height: {{height}}" swipe-directive="swipe-directive" ng-repeat="person in peopleToShow" class="content-wrapper swipable-card">' +
+			template: 	'<div class="ng-swippy noselect" style="width: {{width}}; height: {{height}}">'+
+							'<div person="person" swipe-directive="swipe-directive" ng-repeat="person in peopleToShow" class="content-wrapper swipable-card">' +
   								'<div class="card">' +
     								'<div style="background: url({{person.thumbnail}}) no-repeat 50% 15%" class="photo-item"></div>' +
-    								'<div class="know-label">Know</div>' +
-    								'<div class="dontknow-label">Don\'t know</div>' +
+    								'<div class="know-label">{{labelOk ? labelOk : "YES"}}</div>' +
+    								'<div class="dontknow-label">{{labelNegative ? labelNegative : "NO"}}</div>' +
   								'</div>' +
 								'<div class="progress-stats" ng-if="data">' +
 									'<div class="card-shown">' +
@@ -25,9 +25,14 @@ angular.module('ngSwippy', ['ngTouch']).
 				collection: '=',
 				width: '@',
 				height: '@',
-				callback: '&',
+				itemClick: '&',
 				data: '=',
-				swipeend: '='
+				collectionEmpty: '&',
+				swipeLeft: '&',
+				swipeRight: '&',
+				cardsNumber: '@',
+				labelOk: '@',
+				labelNegative: '@'
 			},
 
 			link: function(scope){
@@ -35,13 +40,34 @@ angular.module('ngSwippy', ['ngTouch']).
 				scope.init = function(){
 					scope.people = scope.collection.slice(0);
 					scope.peopleBuf = scope.people.slice(0);
-					scope.peopleToShow = scope.peopleBuf.splice(-4);	
+					var number = Number(scope.cardsNumber);
+					var showNumber = 3;
+					if (number && number >= 2 && Math.abs(number) <= scope.peopleBuf.length){
+						showNumber = Math.abs(number);
+					}
+					scope.peopleToShow = scope.peopleBuf.splice(-showNumber);	
 				};
 
-				scope.removeElementFromCollection = function(person){
+				scope.removeElementFromCollection = function(person, direction){
+					var directionHandler;
+					switch(direction){
+						case 'left':
+							directionHandler = scope.swipeLeft();
+							break;
+						case 'right':
+							directionHandler = scope.swipeRight();
+							break;
+						default:
+							directionHandler = undefined;
+							break;
+					}
+					if (direction){
+						directionHandler(person);
+					}
 					scope.people.splice(scope.people.indexOf(person), 1);
 					if (scope.people.length === 0){
-						scope.swipeend = true;
+						var emptyCollectionHandler = scope.collectionEmpty();
+						emptyCollectionHandler();
 					} else {
 						scope.peopleToShow.splice(scope.peopleToShow.indexOf(person), 1);
 					}
@@ -65,6 +91,8 @@ angular.module('ngSwippy', ['ngTouch']).
 				var screenHeight = $window.screen.availHeight;
 				var moving = false;
 				var timeoutStart = 0;
+				var $labelunknown = element[0].querySelector('.dontknow-label');
+				var $labelknow = element[0].querySelector('.know-label');
 
 				scope.swipeObject = {
 					swiping: 0,
@@ -74,10 +102,11 @@ angular.module('ngSwippy', ['ngTouch']).
 					offsetY: 0
 				};
 
-				var expressionHandler = scope.$parent.callback();
+				var expressionHandler = scope.$parent.itemClick();
 
 				swipe.bind(element, {
 					start: function(coordinates) {
+						
 						if (!scope.isSwiping) {
 							scope.isSwiping = true;
 							scope.swipeObject.startX = coordinates.x;
@@ -89,6 +118,9 @@ angular.module('ngSwippy', ['ngTouch']).
 						timeoutStart = Date.now();
 					},
 					move: function(coordinates) {
+						event.stopPropagation();
+						event.stopImmediatePropagation();
+						event.preventDefault();
 						if (!scope.isSwiping) {
 							return;
 						} else {
@@ -112,14 +144,37 @@ angular.module('ngSwippy', ['ngTouch']).
 								scope.swipeObject.offsetY = coordinates.y - scope.swipeObject.startY;
 
 								var rotateX = scope.swipeObject.offsetX;
+								var opacity = Math.abs(scope.swipeObject.offsetX) / 150;
+
+								if (opacity > 1) {
+									opacity = 1;
+								}
+
+								var labelx = '15%';
+
+								if (scope.swipeObject.offsetX <= 0){
+									labelx = '60%';
+								}
+								
+								if (scope.swipeObject.offsetX > 0){
+									$labelunknown.style['opacity'] = '0';
+									$labelknow.style['opacity'] = opacity;
+									$labelknow.style['left'] = labelx;
+									$labelknow.style['transform'] = 'rotateZ(-45deg)';
+								} else {
+									$labelknow.style['opacity'] = '0';
+									$labelunknown.style['opacity'] = opacity;
+									$labelunknown.style['left'] = labelx;
+									$labelunknown.style['transform'] = 'rotateZ(45deg)';
+								}
 
 								if (scope.swipeObject.offsetY < 0){
 									rotateX = -scope.swipeObject.offsetX;
 								}
 
 								element.css({
-									'-webkit-transform': 'translate3d(' + scope.swipeObject.offsetX + 'px,'+ scope.swipeObject.offsetY + 'px,0)  rotateZ('+  (rotateX /10) * Math.abs(scope.swipeObject.offsetY/80) +'deg)',
-									'transform': 'translate3d(' + scope.swipeObject.offsetX + 'px,'+ scope.swipeObject.offsetY + 'px,0)  rotateZ('+  (rotateX /10) * Math.abs(scope.swipeObject.offsetY/80) +'deg)'
+									'-webkit-transform': 'translate3d(' + scope.swipeObject.offsetX + 'px,'+ scope.swipeObject.offsetY + 'px,0)  rotateZ('+  (rotateX * ($window.screen.availWidth/30) /$window.screen.availWidth) * Math.abs(scope.swipeObject.offsetY/80) +'deg)',
+									'transform': 'translate3d(' + scope.swipeObject.offsetX + 'px,'+ scope.swipeObject.offsetY + 'px,0)  rotateZ('+  (rotateX * ($window.screen.availWidth/30) /$window.screen.availWidth) * Math.abs(scope.swipeObject.offsetY/80) +'deg)'
 								});
 							}
 						}
@@ -166,13 +221,16 @@ angular.module('ngSwippy', ['ngTouch']).
 								}
 
 							element.css(style);
+							
+							var direction = scope.swipeObject.offsetX < 0 ? 'left' : 'right';
 
 							scope.swipeObject.offsetX = 0;
 							scope.swipeObject.offsetY = 0;
 
 							$timeout(function(){
-								scope.$parent.removeElementFromCollection(scope.person);
-							},500);
+								
+								scope.$parent.removeElementFromCollection(scope.person, direction);
+							}, 500);
 						} else {
 							element.css({
 								'-webkit-transform': 'translate3d(' + 0 + 'px,0,0)',
@@ -181,6 +239,8 @@ angular.module('ngSwippy', ['ngTouch']).
 
 							scope.swipeObject.offsetX = 0;
 							scope.swipeObject.offsetY = 0;
+							$labelunknown.style['opacity'] = '0';
+							$labelknow.style['opacity'] = '0';
 						}
 						
 					}

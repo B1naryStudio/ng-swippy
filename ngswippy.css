@@ -31,8 +31,8 @@
 
 
 .ng-swippy {
-	width: 100%;
-	height: 200px;
+  margin: auto;
+  display: inline-block;
 	position: relative;
 }
 
@@ -59,10 +59,14 @@
   font-size: 16px;
   height: 20px;
   text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .progress-stats .card-shown-text {
   font-size: 12px;
   height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .progress-stats .card-number {
@@ -107,4 +111,13 @@
   font-family: Open Sans, Sans-serif;
   text-transform: uppercase;
   font-weight: 700;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

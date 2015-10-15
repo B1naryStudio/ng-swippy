@@ -2,47 +2,55 @@ angular.module('ngSwippyDemo', ['ngSwippy', 'ngMaterial'])
 	.controller('MainController', function($scope, $timeout){
 		$scope.itemsCollection = [{
 			thumbnail: 'images/1.jpg',
-			title: 'Clara Oswin Oswald',
-			subtitle: 'clara@gmail.com'
+			title: 'David Tennant',
+			subtitle: 'david@gmail.com'
 		}, {
 			thumbnail: 'images/2.jpg',
-			title: 'Emy Pond',
-			subtitle: 'emy@gmail.com'
+			title: 'Matt Smith',
+			subtitle: 'matt@gmail.com'
 		},{
 			thumbnail: 'images/3.jpg',
-			title: 'Rose Tyler',
-			subtitle: 'rose@gmail.com',
+			title: 'Peter Capaldi',
+			subtitle: 'peter@gmail.com',
 		},{
 			thumbnail: 'images/4.jpg',
-			title: 'Donna Noble',
-			subtitle: 'donna@gmail.com',
+			title: 'Christopher Eccleston',
+			subtitle: 'christopher@gmail.com',
 		},{
 			thumbnail: 'images/5.jpg',
-			title: 'Martha Jones',
-			subtitle: 'martha@gmail.com',
+			title: 'Arthur Darvill',
+			subtitle: 'arthur.darvill@gmail.com',
 		}];
 
 		$scope.myCustomFunction = function(){
 			$timeout(function(){
 				$scope.clickedTimes = $scope.clickedTimes + 1;
+				$scope.actions.unshift({name: 'Click on item'});
 			});
 			
 		};
 
 		$scope.size = {
 			width: 300,
-			height: 200
+			height: 400
 		};
 
 		$scope.showinfo = true;
 
-		$scope.swipeend = false;
+		$scope.swipeend = function(){
+			$scope.actions.unshift({name: 'Collection Empty'});
+		};
 
 		$scope.clickedTimes = 0;
 
-		$scope.$watch('swipeend', function(el){
-			if (el){
-				alert('Done!');
-			}
-		});
+		$scope.actions = [];
+
+		$scope.swipeLeft = function(person){
+			$scope.actions.unshift({name: 'Left swipe'});
+		};
+
+		$scope.swipeRight = function(person){
+			$scope.actions.unshift({name: 'Right swipe'});
+		};
+
 	});
