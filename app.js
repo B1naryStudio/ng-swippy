@@ -1,10 +1,6 @@
 angular.module('ngSwippyDemo', ['ngSwippy', 'ngMaterial'])
 	.controller('MainController', function($scope, $timeout){
 		$scope.itemsCollection = [{
-			thumbnail: 'images/1.jpg',
-			title: 'David Tennant',
-			subtitle: 'david@gmail.com'
-		}, {
 			thumbnail: 'images/2.jpg',
 			title: 'Matt Smith',
 			subtitle: 'matt@gmail.com'
@@ -20,7 +16,15 @@ angular.module('ngSwippyDemo', ['ngSwippy', 'ngMaterial'])
 			thumbnail: 'images/5.jpg',
 			title: 'Arthur Darvill',
 			subtitle: 'arthur.darvill@gmail.com',
-		}];
+		},{
+			thumbnail: 'images/6.jpg',
+			title: 'Master',
+			subtitle: 'master@gmail.com',
+		}, {
+			thumbnail: 'images/1.jpg',
+			title: 'David Tennant',
+			subtitle: 'david@gmail.com'
+		}, ];
 
 		$scope.myCustomFunction = function(){
 			$timeout(function(){

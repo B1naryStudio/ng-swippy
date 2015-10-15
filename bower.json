@@ -1,0 +1,17 @@
+{
+  "name": "ng-swippy",
+  "main": "ng-swippy.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/B1naryStudio/ng-swippy",
+  "authors": [
+    "Bogdan Rusinka <rusinka.bogdan@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
