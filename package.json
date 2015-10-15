@@ -1,0 +1,19 @@
+{
+  "name": "ng-swippy",
+  "version": "0.1.0",
+  "description": "Angular directive for tinder-like card view.  Live [Demo](http://b1narystudio.github.io/ng-swippy/) ![alt text](https://github.com/B1naryStudio/ng-swippy/blob/master/title.jpg \"ng-swippy example\")",
+  "main": "ng-swippy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/B1naryStudio/ng-swippy.git"
+  },
+  "author": "Rusinka Bogdan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/B1naryStudio/ng-swippy/issues"
+  },
+  "homepage": "https://github.com/B1naryStudio/ng-swippy"
+}
