@@ -23,7 +23,7 @@ In your html code include ng-swippy.js and ngswippy.css
 <script src="ng-swippy.js"></script>
 ```
 
-Then also need to require ngSwippy module as a dependency and ngTouch native Angular module. Make sure swipeFactory.js is included.
+Then also need to require ngSwippy module as a dependency and ngTouch native Angular module.
 
 ```javascript
 angular.module('myModule', ['ngTouch', 'ngSwippy'])
