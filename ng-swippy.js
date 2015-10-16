@@ -214,9 +214,6 @@ angular.module('ngSwippy', ['ngTouch'])
 						timeoutStart = Date.now();
 					},
 					move: function(coordinates) {
-						event.stopPropagation();
-						event.stopImmediatePropagation();
-						event.preventDefault();
 						if (!scope.isSwiping) {
 							return;
 						} else {
