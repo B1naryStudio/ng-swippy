@@ -1,0 +1,100 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'publish' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.37
+4 verbose node symlink /usr/bin/node
+5 verbose publish [ '.' ]
+6 verbose cache add [ '.', null ]
+7 verbose cache add name=undefined spec="." args=[".",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: '.',
+8 verbose parsed url   path: '.',
+8 verbose parsed url   href: '.' }
+9 silly lockFile 3a52ce78- .
+10 verbose lock . /home/bogdan/.npm/3a52ce78-.lock
+11 verbose tar pack [ '/home/bogdan/.npm/ng-swippy/0.1.0/package.tgz', '.' ]
+12 verbose tarball /home/bogdan/.npm/ng-swippy/0.1.0/package.tgz
+13 verbose folder .
+14 info prepublish ng-swippy@0.1.0
+15 silly lockFile 1f1177db-tar tar://.
+16 verbose lock tar://. /home/bogdan/.npm/1f1177db-tar.lock
+17 silly lockFile 27d4d61f--npm-ng-swippy-0-1-0-package-tgz tar:///home/bogdan/.npm/ng-swippy/0.1.0/package.tgz
+18 verbose lock tar:///home/bogdan/.npm/ng-swippy/0.1.0/package.tgz /home/bogdan/.npm/27d4d61f--npm-ng-swippy-0-1-0-package-tgz.lock
+19 silly lockFile 1f1177db-tar tar://.
+20 silly lockFile 1f1177db-tar tar://.
+21 silly lockFile 27d4d61f--npm-ng-swippy-0-1-0-package-tgz tar:///home/bogdan/.npm/ng-swippy/0.1.0/package.tgz
+22 silly lockFile 27d4d61f--npm-ng-swippy-0-1-0-package-tgz tar:///home/bogdan/.npm/ng-swippy/0.1.0/package.tgz
+23 silly lockFile b0143b63-gdan-npm-ng-swippy-0-1-0-package /home/bogdan/.npm/ng-swippy/0.1.0/package
+24 verbose lock /home/bogdan/.npm/ng-swippy/0.1.0/package /home/bogdan/.npm/b0143b63-gdan-npm-ng-swippy-0-1-0-package.lock
+25 silly lockFile b0143b63-gdan-npm-ng-swippy-0-1-0-package /home/bogdan/.npm/ng-swippy/0.1.0/package
+26 silly lockFile b0143b63-gdan-npm-ng-swippy-0-1-0-package /home/bogdan/.npm/ng-swippy/0.1.0/package
+27 silly lockFile 3a52ce78- .
+28 silly lockFile 3a52ce78- .
+29 silly publish { name: 'ng-swippy',
+29 silly publish   version: '0.1.0',
+29 silly publish   description: 'Angular directive for tinder-like card view.  Live [Demo](http://b1narystudio.github.io/ng-swippy/) ![alt text](https://github.com/B1naryStudio/ng-swippy/blob/master/title.jpg "ng-swippy example")',
+29 silly publish   main: 'ng-swippy.js',
+29 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+29 silly publish   repository:
+29 silly publish    { type: 'git',
+29 silly publish      url: 'https://github.com/B1naryStudio/ng-swippy.git' },
+29 silly publish   author: { name: 'Rusinka Bogdan' },
+29 silly publish   license: 'ISC',
+29 silly publish   bugs: { url: 'https://github.com/B1naryStudio/ng-swippy/issues' },
+29 silly publish   homepage: 'https://github.com/B1naryStudio/ng-swippy',
+29 silly publish   readme: '# ng-swippy\nAngular directive for tinder-like card view. \nLive [Demo](http://b1narystudio.github.io/ng-swippy/)\n![alt text](https://github.com/B1naryStudio/ng-swippy/blob/master/title.png "ng-swippy example")\n\n## Installing\nYou can install it via npm\n```shell\nnpm install ng-swippy\n```\nor via bower\n```shell\nbower install ng-swippy\n```\n\n## Loading\n\nIn your html code include ng-swippy.js and ngswippy.css\n\n```html\n<link rel="stylesheet" type="text/css" href="ngswippy.css">\n\n<script src="ng-swippy.js"></script>\n```\n\nThen also need to require ngSwippy module as a dependency and ngTouch native Angular module.\n\n```javascript\nangular.module(\'myModule\', [\'ngTouch\', \'ngSwippy\'])\n```\n\n## Usage\n\nIn your html markup write\n\n```html\n<ng-swippy collection=\'itemsCollection\' width=\'{{size.width}}px\' height=\'{{size.height}}px\' item-click=\'myCustomFunction\' data=\'showinfo\'collection-empty=\'swipeend\' swipe-left=\'swipeLeft\'  swipe-right=\'swipeRight\' cards-number=\'2\' label-ok=\'Cool\' label-negative=\'Bad\'></ng-swippy>\n```\n## Attributes\n\n* **collection** - (required) Its value is collection of elements (users)\n* **height** - (optional) Height of parent element with cards\n* **width** - (optional) Width of parent element width cards\n* **item-click** - (optional) Callback for handling click on the card\n* **data** - (optional) Enables or disables displaying info (title, subtitle, current card number)\n* **collection-empty**  - (optional) Callback for handling swiping out last element\n* **swipe-left** - (optional) Callback for handling swipe to the left\n* **swipe-right** - (optional) Callback for handling swipe to the left\n* **cards-number** - (optional) Number of cards to load in the DOM. By default - 3.\n* **label-ok** - (optional) Green label that describes current action\n* **label-negative** - (optional) Red label that describes current action\n\n## Collection structure\n\nYour collection should have such structure:\n#### Simple collection \n```javascript\n$scope.itemsCollection = [{\n\tthumbnail: \'images/1.jpg\',\n\ttitle: \'Clara Oswin Oswald\',\n\tsubtitle: \'clara@gmail.com\'\n}, {\n\tthumbnail: \'images/2.jpg\',\n\ttitle: \'Emy Pond\',\n\tsubtitle: \'emy@gmail.com\'\n}]\n```\n\n## Changelog\n\n### Current version 0.1.0 (2015-10-15)\n\n##Created by [BogdanRusinka](https://github.com/BogdanRusinka) \n\n##Contributing\nFeel free to open issues and send PRs. \n\n## License\n\nThe MIT License (MIT)\n\n[![Binary Studio](http://www.binary-studio.com/wp-content/uploads/2014/11/logo.gif)](http://binary-studio.com)  \nCopyright (c) 2015 Rusinka Bogdan bogdan.rusinka@gmail.com\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n',
+29 silly publish   readmeFilename: 'README.md',
+29 silly publish   gitHead: '61ec67d01faeb6e207c6ceb4164d0e9a6ee52ed2',
+29 silly publish   _id: 'ng-swippy@0.1.0',
+29 silly publish   _shasum: '834fd29bab990429982bb69b2fe6422211ac4c0d',
+29 silly publish   _from: '.' }
+30 verbose request where is /ng-swippy
+31 verbose request registry https://registry.npmjs.org/
+32 verbose request id a0211233e0e201e1
+33 verbose url raw /ng-swippy
+34 verbose url resolving [ 'https://registry.npmjs.org/', './ng-swippy' ]
+35 verbose url resolved https://registry.npmjs.org/ng-swippy
+36 verbose request where is https://registry.npmjs.org/ng-swippy
+37 info trying registry request attempt 1 at 11:25:41
+38 http PUT https://registry.npmjs.org/ng-swippy
+39 http 403 https://registry.npmjs.org/ng-swippy
+40 verbose headers { 'content-type': 'application/json',
+40 verbose headers   'cache-control': 'max-age=60',
+40 verbose headers   'content-length': '95',
+40 verbose headers   'accept-ranges': 'bytes',
+40 verbose headers   date: 'Fri, 16 Oct 2015 08:25:46 GMT',
+40 verbose headers   via: '1.1 varnish',
+40 verbose headers   connection: 'keep-alive',
+40 verbose headers   'x-served-by': 'cache-ams4140-AMS',
+40 verbose headers   'x-cache': 'MISS',
+40 verbose headers   'x-cache-hits': '0',
+40 verbose headers   'x-timer': 'S1444983944.290290,VS0,VE1771' }
+41 error publish Failed PUT 403
+42 error Error: "You cannot publish over the previously published version 0.1.0." : ng-swippy
+42 error     at RegClient.<anonymous> (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:308:14)
+42 error     at Request._callback (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:246:65)
+42 error     at Request.self.callback (/usr/lib/node_modules/npm/node_modules/request/request.js:236:22)
+42 error     at Request.emit (events.js:98:17)
+42 error     at Request.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1142:14)
+42 error     at Request.emit (events.js:117:20)
+42 error     at IncomingMessage.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1096:12)
+42 error     at IncomingMessage.emit (events.js:117:20)
+42 error     at _stream_readable.js:944:16
+42 error     at process._tickCallback (node.js:448:13)
+43 error If you need help, you may report this *entire* log,
+43 error including the npm and node versions, at:
+43 error     <http://github.com/npm/npm/issues>
+44 error System Linux 3.13.0-65-generic
+45 error command "/usr/bin/node" "/usr/bin/npm" "publish"
+46 error cwd /home/bogdan/ng-swippy
+47 error node -v v0.10.37
+48 error npm -v 1.4.28
+49 verbose exit [ 1, true ]
