@@ -133,6 +133,9 @@ angular.module('ngSwippy', ['ngTouch'])
 
 			link: function(scope){
 
+				scope.isMoving = false;
+				scope.moveBack = false;
+
 				scope.init = function(){
 					scope.people = scope.collection.slice(0);
 					scope.peopleBuf = scope.people.slice(0);
@@ -176,7 +179,10 @@ angular.module('ngSwippy', ['ngTouch'])
 			}
 		}
 	}])
-	.directive('swipeDirective', ['swipe', '$window', '$timeout', function(swipe, $window, $timeout){
+	.value('swipeDirectiveValues', {
+	  moveBack: false
+	})
+	.directive('swipeDirective', ['swipe', '$window', '$timeout', 'swipeDirectiveValues', function(swipe, $window, $timeout, swipeDirectiveValues){
 		return {
 			restrict: 'A',
 			scope: {
@@ -201,10 +207,14 @@ angular.module('ngSwippy', ['ngTouch'])
 				var expressionHandler = scope.$parent.itemClick();
 
 				swipe.bind(element, {
-					start: function(coordinates) {
-						
+					start: function(coordinates, evt) {
+						var children = element.parent().children();
+						if (swipeDirectiveValues.moveBack){
+							return false;
+						}
 						if (!scope.isSwiping) {
 							scope.isSwiping = true;
+							scope.$parent.isMoving = true;
 							scope.swipeObject.startX = coordinates.x;
 							scope.swipeObject.startY = coordinates.y;
 						} else {
@@ -214,7 +224,7 @@ angular.module('ngSwippy', ['ngTouch'])
 						timeoutStart = Date.now();
 					},
 					move: function(coordinates) {
-						if (!scope.isSwiping) {
+						if (!scope.isSwiping || swipeDirectiveValues.moveBack) {
 							return;
 						} else {
 							if (!moving){
@@ -274,7 +284,7 @@ angular.module('ngSwippy', ['ngTouch'])
 					},
 					end: function(coordinates) {
 						scope.isSwiping = false;
-						if (scope.swipeObject.offsetX === 0 && scope.swipeObject.offsetY === 0){
+						if (scope.swipeObject.offsetX === 0 && scope.swipeObject.offsetY === 0 || swipeDirectiveValues.moveBack){
 							expressionHandler();
 							return;
 						}
@@ -286,9 +296,12 @@ angular.module('ngSwippy', ['ngTouch'])
 							'transition': 'transform 0.5s',
 						});
 
+						swipeDirectiveValues.moveBack = true;
+
 						if (Math.abs(scope.swipeObject.offsetX / screenWidth) > 0.200 || Math.abs(scope.swipeObject.offsetY / screenHeight) > 0.100) {
 							var style;
 							var y = 100;
+							
 							var x = window.innerWidth / element[0].offsetWidth * 100;
 
 								if (scope.swipeObject.offsetX < 0 && scope.swipeObject.offsetY < 0){
@@ -317,25 +330,34 @@ angular.module('ngSwippy', ['ngTouch'])
 							
 							var direction = scope.swipeObject.offsetX < 0 ? 'left' : 'right';
 
+							swipeDirectiveValues.moveBack = false;
+							
 							scope.swipeObject.offsetX = 0;
 							scope.swipeObject.offsetY = 0;
+							console.log('Here we set false');
+							scope.$parent.isMoving = false;
 
-							$timeout(function(){
-								
+							$timeout(function(){			
 								scope.$parent.removeElementFromCollection(scope.person, direction);
 							}, 500);
 						} else {
+
 							element.css({
 								'-webkit-transform': 'translate3d(' + 0 + 'px,0,0)',
 								'transform': 'translate3d(' + 0 + 'px,0,0)'
 							});
+
+							$timeout(function(){
+								scope.$parent.isMoving = false;
+								console.log('Should be true, but: ' + swipeDirectiveValues.moveBack);
+								swipeDirectiveValues.moveBack = false;
+							}, 500);
 
 							scope.swipeObject.offsetX = 0;
 							scope.swipeObject.offsetY = 0;
 							$labelunknown.style['opacity'] = '0';
 							$labelknow.style['opacity'] = '0';
 						}
-						
 					}
 				});
 			}
