@@ -67,8 +67,11 @@ $scope.itemsCollection = [{
 ```
 
 ## Changelog
+ 
+### Current version 0.1.2 (2015-10-20)
+- Fixed bugs with touching second card when the first is active
 
-### Current version 0.1.0 (2015-10-15)
+### First release 0.1.0 (2015-10-15)
 
 ##Created by [BogdanRusinka](https://github.com/BogdanRusinka) 
 
