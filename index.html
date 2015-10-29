@@ -8,7 +8,8 @@
 	</head>
 	<style type="text/css">
 		.demo-wrap {
-			height: 65%;
+			/*height: 65%;*/
+			max-height: 510px;
 		}
 		body {
 			font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -18,7 +19,7 @@
 		h1 {
 			color: #475577;
 			text-align: center;
-			padding: 20px;
+			padding: 5px;
 		} 
 		legend {
 			color: #3F51B5; 
@@ -32,8 +33,8 @@
 			overflow: auto;
 		}
 		.ng-swippy {
-			margin-left: 50%;
-			transform: translateX(-50%);
+			margin: auto;
+			display: block;
 		}
 		#logo {
 			padding: 20px 20px 0;
@@ -42,60 +43,118 @@
 		.headerText {
 			margin: 0;
 		}
+
+		.layout-wrap {
+			margin-top: 10px;
+		}
+
+		@media all and (max-width: 520px){
+			.fork-me img{
+				width: 100px;
+			}
+
+			#logo img{
+				width: 50px;
+			}
+
+			.headerText {
+				font-size: 15px;
+				padding-top: 0;
+			}
+
+			fieldset {
+				max-width: 100% !important;
+				font-size: 14px;
+			}
+
+			.flex-50 {
+				max-width: 100% !important;
+			}
+
+			.actions {
+				display: none;
+			}
+
+			md-checkbox {
+				margin: 0;
+				padding-left: 0 0 0 18px;
+			}
+
+			legend {
+				display: none;
+			}
+
+			.flex-10 {
+				max-width: 18% !important;
+			}
+
+			md-slider {
+				display: none;
+			}
+
+			.ng-swippy {
+				width: 300px;
+				height: 300px !important;
+			}
+
+			.size-settings {
+				display: none;
+			}
+		}
 	</style>
 	<body ng-app='ngSwippyDemo' ng-controller="MainController" class='ngSwippyDemo' ng-cloak>
 		<p id='logo' style="text-align:center"><a href="http://www.binary-studio.com/"><img src='http://b1narystudio.github.io/md-chips/logo.gif'></p></a>
 		<h1 class="headerText">Demo for ng-swippy Directive</h1>
-		<div layout="row" layout-wrap>
-		<fieldset class="standard" flex="70">
-			<legend>Using <code>attributes</code></legend>
-			<div layout="row" layout-wrap>
-			  <div flex="50">
-				<md-checkbox ng-model="showinfo">
-				  Show additional data
-				</md-checkbox>
-			  </div>
-			</div>
-			 <div layout>
-			  <div flex="10" layout layout-align="center center">
-				<span class="md-body-1">Width</span>
-			  </div>
-			  <md-slider flex min="300" max="500" ng-model="size.width" aria-label="red" id="red-slider" class>
-			  </md-slider>
-			  <div flex="20" layout layout-align="center center">
-				<input flex type="number" ng-model="size.width" aria-label="red" aria-controls="red-slider">
-			  </div>
-			</div>
-			 <div layout>
-			  <div flex="10" layout layout-align="center center">
-				<span class="md-body-1">Height</span>
-			  </div>
-			  <md-slider flex min="300" max="500" ng-model="size.height" aria-label="red" id="red-slider" class>
-			  </md-slider>
-			  <div flex="20" layout layout-align="center center">
-				<input flex type="number" ng-model="size.height" aria-label="red" aria-controls="red-slider">
-			  </div>
-			</div>
-			 <span class="no-select"> Clicked the item:</span> {{clickedTimes}} times
-		</fieldset>
-		<fieldset class="standard" flex="25">
-			<legend>Actions</legend>
-		   <md-list>
-			<md-list-item class="md-1-line" ng-repeat="item in actions">
-			<div class="md-list-item-text" layout="column">
-				<h5>{{ item.name }}</h5>
-			</div>
-			<md-divider ></md-divider>
-			</md-list-item>
-		</md-list>
-		</fieldset>
-		</div>
+
 
 		<div class='demo-wrap'>
 			<ng-swippy collection='itemsCollection' width='{{size.width}}px' height='{{size.height}}px' item-click='myCustomFunction' data='showinfo'collection-empty='swipeend' swipe-left='swipeLeft'  swipe-right='swipeRight' cards-number='3' label-ok='Cool' label-negative='Bad'></ng-swippy>
-		<div>
-
-		<a href="https://github.com/B1naryStudio/ng-swippy"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+		</div>
+		<div layout="row" layout-wrap>
+			<fieldset class="standard" flex="70">
+				<legend>Using <code>attributes</code></legend>
+				<div layout="row" layout-wrap>
+				  <div flex="50">
+					<md-checkbox ng-model="showinfo">
+					  Show additional data
+					</md-checkbox>
+				  </div>
+				</div>
+				 <div layout class='size-settings'>
+				  <div flex="10" layout layout-align="center center">
+					<span class="md-body-1">Width</span>
+				  </div>
+				  <md-slider flex min="300" max="500" ng-model="size.width" aria-label="red" id="red-slider" class>
+				  </md-slider>
+				  <div flex="20" layout layout-align="center center">
+					<input flex type="number" ng-model="size.width" aria-label="red" aria-controls="red-slider">
+				  </div>
+				</div>
+				 <div layout  class='size-settings'>
+				  <div flex="10" layout layout-align="center center">
+					<span class="md-body-1">Height</span>
+				  </div>
+				  <md-slider flex min="300" max="500" ng-model="size.height" aria-label="red" id="red-slider" class>
+				  </md-slider>
+				  <div flex="20" layout layout-align="center center">
+					<input flex type="number" ng-model="size.height" aria-label="red" aria-controls="red-slider">
+				  </div>
+				</div>
+				 <span class="no-select"> Clicked the item:</span> {{clickedTimes}} times
+			</fieldset>
+			<fieldset class="standard actions" flex="25">
+				<legend>Actions</legend>
+			   <md-list>
+				<md-list-item class="md-1-line" ng-repeat="item in actions">
+				<div class="md-list-item-text" layout="column">
+					<h5>{{ item.name }}</h5>
+				</div>
+				<md-divider ></md-divider>
+				</md-list-item>
+			</md-list>
+			</fieldset>
+		</div>
+		<a class='fork-me' href="https://github.com/B1naryStudio/ng-swippy"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
 	</body>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
